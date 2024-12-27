@@ -1,0 +1,14 @@
+/home/angelica/projects/ThousandMiles/TextRpg/bin/Debug/net9.0/TextRpg
+/home/angelica/projects/ThousandMiles/TextRpg/bin/Debug/net9.0/TextRpg.deps.json
+/home/angelica/projects/ThousandMiles/TextRpg/bin/Debug/net9.0/TextRpg.runtimeconfig.json
+/home/angelica/projects/ThousandMiles/TextRpg/bin/Debug/net9.0/TextRpg.dll
+/home/angelica/projects/ThousandMiles/TextRpg/bin/Debug/net9.0/TextRpg.pdb
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.GeneratedMSBuildEditorConfig.editorconfig
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.AssemblyInfoInputs.cache
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.AssemblyInfo.cs
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.csproj.CoreCompileInputs.cache
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.dll
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/refint/TextRpg.dll
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.pdb
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.genruntimeconfig.cache
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/ref/TextRpg.dll
