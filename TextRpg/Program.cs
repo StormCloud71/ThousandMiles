@@ -1,70 +1,62 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ObjectiveC;
-using System.Text.Json.Nodes;
-/// Road of a Thousand Miles
-/// A small, random TextRPG
-class Randomizer{
-    /// <summary>
-    /// A randomized, weighted class
-    /// </summary>
-    Dictionary<string,double> weightDictionary;
-    double TotalWeight;
-    public Randomizer() {
-        weightDictionary=new Dictionary<string, double>();
-        TotalWeight=0.0;
-    }
-    public void AddWeight(string chs, double weight) {
-        if (!(weightDictionary.ContainsKey(chs))) {
-            weightDictionary.Add(chs,weight);
-            TotalWeight+=weight;
-        } else {
-            //This might be turned to just increased weight for a choice
-            throw new ArgumentException ("Weighted Choice added again");
-        }
-    }
-    public string PickAChoice() {
-        Random rnd= new Random();
-        double pos=rnd.NextDouble()*TotalWeight;
-        double cs=0.0;
-        string ret="";
-        foreach(KeyValuePair<string,double> chs in weightDictionary)
-        {
-            ret=chs.Key;
-            cs+=chs.Value;
-            if (cs>pos) {
-                break;
-            }
-        }
-        return ret;
 
+class Actor {
+    string Name {get; set;}
+    int MaxHP {get; set;}
+    int CurrentHP {get; set;}
+    int Attackforce {get; set;}
+    int Defenseforce {get; set;}
+    //This should be inherited from another class probably
+    int CoinsInWallet {get; set;}
+    int FoodRations {get; set;}
+    bool Alive {get; set;}
+    // Just a string Dictionary for equipment now
+    Dictionary <string,string> Equipment;
+    //Constructor added
+    public Actor(string nm, int hp, int atfo, int defo){
+        Name=nm;
+        MaxHP=hp;
+        CurrentHP=hp;
+        Attackforce=atfo;
+        Defenseforce=defo;
+        Alive=true;
+        Equipment= new Dictionary<string,string>();
+        Equipment.Add("Head","Empty");
+        Equipment.Add("Body","Empty");
+        Equipment.Add("Left Shoulder","Empty");
+        Equipment.Add("Right Shoulder","Empty");
+        Equipment.Add("Left Hand","Empty");
+        Equipment.Add("Right Hand","Empty");
+        Equipment.Add("Left Leg","Empty");
+        Equipment.Add("Right Leg","Empty");
+        Equipment.Add("Left Foot","Empty");
+        Equipment.Add("Right Foot","Empty");
+        CoinsInWallet=0;
+        FoodRations=0;
     }
-    public void LoadJsonWeights(string ldWeights) {
-        JsonNode objects= JsonNode.Parse(ldWeights);
-        var obar=objects.AsArray();    
-        foreach (JsonObject q in obar) {
-            string obtyp=q["Name"].ToString();
-            double obw;
-            Double.TryParse(q["Weight"].ToString(), out obw);
-            AddWeight(obtyp,obw);
-        }
+    public void GibCoins(int coins) {
+        CoinsInWallet+=coins;
     }
-    public void ReadAFile(string filename) {
-        string myLine="";
-        string docPath=Environment.CurrentDirectory.ToString();
-        try {
-            StreamReader fr= new StreamReader(Path.Combine(docPath,"config",filename));
-            myLine=fr.ReadToEnd();    
+    public void GibFood(int rations) {
+        FoodRations+=rations;
+    }
+    public string Description() {
+        string outp=$"Character name is {Name}.";
+        if (CurrentHP==MaxHP) {
+            outp+="They are in perfect health.";
+        } else {
+            outp+="They are injured. ";
         }
-        catch(Exception e) {
-            Console.WriteLine("Exception: "+e.Message);
-        }
-        finally {
-            if (myLine.Length>1) {
-                LoadJsonWeights(myLine);
+        outp+=$"In their wallet they have {CoinsInWallet} coins. ";
+        outp+=$"In their bag they have {FoodRations} rations.";
+        return outp;
             }
-        }
-    }
 }
 class Program {
     public static void Main() {
@@ -77,12 +69,14 @@ class Program {
         string answer=Console.ReadLine();
         if (answer.Length>1) {CharacterName=answer;}
         Console.WriteLine ($"Your journey begins now, {CharacterName}!");
+        Actor myChara=new Actor(CharacterName,100,10,10);
         string SampleInventory=Objects.PickAChoice(); 
         switch(SampleInventory){
             case "Coins":
                 int coinno= new Random().Next(100);
                 CharacterWealth+=coinno;
                 SampleInventory=$"bag of coins, containing {coinno} coins,";
+                myChara.GibCoins(coinno);
                 break;
             case "Armor":
                 Randomizer arm=new Randomizer();
@@ -95,7 +89,9 @@ class Program {
                 SampleInventory=wpn.PickAChoice();
                 break;
             case "Food":
-                SampleInventory="pack of food";
+                int rationno=new Random().Next(10);
+                SampleInventory=$"pack of food with {rationno} rations";
+                myChara.GibFood(rationno);
                 break;
             case "Tool":
                 Randomizer tl=new Randomizer();
@@ -108,6 +104,6 @@ class Program {
         }
         Console.WriteLine ($"You can have a {SampleInventory} as a gift.");
         Console.WriteLine ("Now, go!");
-
+        Console.WriteLine ($"By the way this is you: {myChara.Description()}");
     }
 }
