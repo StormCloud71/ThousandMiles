@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ObjectiveC;
 using System.Text.Json.Nodes;
 /// Road of a Thousand Miles
@@ -70,12 +71,42 @@ class Program {
         //Initialization
         Randomizer Objects=new Randomizer();
         Objects.ReadAFile("Objects.json");
+        int CharacterWealth=0;
         string CharacterName="Unknown";
         Console.Write ("Please insert your name: ");
         string answer=Console.ReadLine();
         if (answer.Length>1) {CharacterName=answer;}
         Console.WriteLine ($"Your journey begins now, {CharacterName}!");
-        Console.WriteLine ($"You can have a {Objects.PickAChoice()} as a gift.");
+        string SampleInventory=Objects.PickAChoice(); 
+        switch(SampleInventory){
+            case "Coins":
+                int coinno= new Random().Next(100);
+                CharacterWealth+=coinno;
+                SampleInventory=$"bag of coins, containing {coinno} coins,";
+                break;
+            case "Armor":
+                Randomizer arm=new Randomizer();
+                arm.ReadAFile("Armors.json");
+                SampleInventory=arm.PickAChoice();
+                break;
+            case "Weapon":
+                Randomizer wpn=new Randomizer();
+                wpn.ReadAFile("Weapons.json");
+                SampleInventory=wpn.PickAChoice();
+                break;
+            case "Food":
+                SampleInventory="pack of food";
+                break;
+            case "Tool":
+                Randomizer tl=new Randomizer();
+                tl.ReadAFile("Tools.json");
+                SampleInventory=tl.PickAChoice();
+                break;
+            default:
+                SampleInventory="thing that's wrong";
+                break;
+        }
+        Console.WriteLine ($"You can have a {SampleInventory} as a gift.");
         Console.WriteLine ("Now, go!");
 
     }
