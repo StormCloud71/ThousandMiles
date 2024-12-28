@@ -67,12 +67,16 @@ class Randomizer{
 }
 class Program {
     public static void Main() {
-        const int CLIN = 10;
-        Randomizer Weapons=new Randomizer();
+        //Initialization
         Randomizer Objects=new Randomizer();
-        Weapons.ReadAFile("Weapons.json");
         Objects.ReadAFile("Objects.json");
-        Console.WriteLine($"An Object: {Objects.PickAChoice()}");
-        Console.WriteLine($"A Weapon: {Weapons.PickAChoice()}");
+        string CharacterName="Unknown";
+        Console.Write ("Please insert your name: ");
+        string answer=Console.ReadLine();
+        if (answer.Length>1) {CharacterName=answer;}
+        Console.WriteLine ($"Your journey begins now, {CharacterName}!");
+        Console.WriteLine ($"You can have a {Objects.PickAChoice()} as a gift.");
+        Console.WriteLine ("Now, go!");
+
     }
 }
