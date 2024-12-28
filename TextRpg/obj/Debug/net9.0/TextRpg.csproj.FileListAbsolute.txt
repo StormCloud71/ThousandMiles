@@ -12,3 +12,4 @@
 /home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.pdb
 /home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.genruntimeconfig.cache
 /home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/ref/TextRpg.dll
+/home/angelica/projects/ThousandMiles/TextRpg/obj/Debug/net9.0/TextRpg.sourcelink.json

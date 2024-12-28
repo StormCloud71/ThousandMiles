@@ -2,5 +2,5 @@ This was created just for fun and spite. Mostly spite. To prove to myself, first
 
 Where it will end? I don't know.
 
-If you want to run it, please create an Objects.Json in your Documents folder. The JSON should contain a list with elements in the form {"Name":<some string>,"Weight":<some numeral>},
+If you want to run it, please create an Objects.Json and a Weapons.Json in a "config" folder on the same folder as your binary. The JSON should contain a list with elements in the form {"Name":<some string>,"Weight":<some numeral>},
 

@@ -48,44 +48,31 @@ class Randomizer{
             AddWeight(obtyp,obw);
         }
     }
+    public void ReadAFile(string filename) {
+        string myLine="";
+        string docPath=Environment.CurrentDirectory.ToString();
+        try {
+            StreamReader fr= new StreamReader(Path.Combine(docPath,"config",filename));
+            myLine=fr.ReadToEnd();    
+        }
+        catch(Exception e) {
+            Console.WriteLine("Exception: "+e.Message);
+        }
+        finally {
+            if (myLine.Length>1) {
+                LoadJsonWeights(myLine);
+            }
+        }
+    }
 }
 class Program {
     public static void Main() {
         const int CLIN = 10;
-        string myLine="";
-        string[] lines = new string[CLIN];
-        Console.WriteLine("So, it begins...");
-        Randomizer x= new Randomizer();
-        Randomizer obtype= new Randomizer();
-        x.AddWeight("Sword",2.0);
-        x.AddWeight("Mace",10.0);
-        x.AddWeight("Spear",3.0);
-        x.AddWeight("Chakram",0.5);
-        x.AddWeight("Kelewang",0.2);
-        x.AddWeight("Bow",8.5);
-        x.AddWeight("Rapier",0.6);
-        string docPath=Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        for (int i=0;i<CLIN;i++) {
-            lines[i]=x.PickAChoice();
-        }
-        File.AppendAllLines(Path.Combine(docPath,"Testlines.txt"),lines);
-        try{
-            StreamReader fr= new StreamReader(Path.Combine(docPath,"Objects.json"));
-            myLine=fr.ReadToEnd();
-        }
-        catch(Exception e) {
-            Console.WriteLine("Exception: " +e.Message);
-        }
-        finally {
-            Console.WriteLine("...Oh, well..");
-            if (myLine.Length>0) {
-                obtype.LoadJsonWeights(myLine);
-                for (int i=0; i<30; i++) {
-                    Console.WriteLine(obtype.PickAChoice());
-                }
-                
-            }
-        }
-
+        Randomizer Weapons=new Randomizer();
+        Randomizer Objects=new Randomizer();
+        Weapons.ReadAFile("Weapons.json");
+        Objects.ReadAFile("Objects.json");
+        Console.WriteLine($"An Object: {Objects.PickAChoice()}");
+        Console.WriteLine($"A Weapon: {Weapons.PickAChoice()}");
     }
 }

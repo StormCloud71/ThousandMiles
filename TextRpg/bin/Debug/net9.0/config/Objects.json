@@ -1,0 +1,10 @@
+[{"Name": "Weapon",
+"Weight":10},
+{"Name": "Armor",
+"Weight":5},
+{"Name": "Coins",
+  "Weight":10},
+{"Name": "Food",
+"Weight":40},
+{"Name": "Tool",
+"Weight":100}]
